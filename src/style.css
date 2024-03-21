@@ -1,0 +1,9 @@
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: rgb(16, 16, 20);
+}
+:root{
+  --n-item-text-color: rgb(188, 188, 188) !important;
+}
