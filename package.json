@@ -16,12 +16,14 @@
     "vfonts": "^0.0.3",
     "vue": "^3.4.21",
     "vue-konva": "^3.0.2",
-    "vue-router": "^4.3.0"
+    "vue-router": "^4.3.0",
+    "eventemitter3": "^5.0.1"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.4",
     "typescript": "^5.2.2",
     "vite": "^5.2.0",
-    "vue-tsc": "^2.0.6"
+    "vue-tsc": "^2.0.6",
+    "prettier": "^2.8.6"
   }
 }

@@ -1,69 +1,62 @@
 <script setup lang="ts">
-import {MenuOption, NMenu} from 'naive-ui'
-
-
-const menuOptions: MenuOption[] = [
+import { NDropdown, NButton, NSpace } from 'naive-ui';
+import logo from '../../assets/logo.png';
+const fileOption = [
   {
-    label: '舞，舞，舞',
-    key: 'dance-dance-dance',
-    children: [
-      {
-        type: 'group',
-        label: '人物',
-        key: 'people',
-        children: [
-          {
-            label: '叙事者',
-            key: 'narrator',
-          },
-          {
-            label: '羊男',
-            key: 'sheep-man',
-          }
-        ]
-      },
-      {
-        label: '饮品',
-        key: 'beverage',
-        children: [
-          {
-            label: '威士忌',
-            key: 'whisky'
-          }
-        ]
-      },
-      {
-        label: '食物',
-        key: 'food',
-        children: [
-          {
-            label: '三明治',
-            key: 'sandwich'
-          }
-        ]
-      },
-      {
-        label: '过去增多，未来减少',
-        key: 'the-past-increases-the-future-recedes'
-      }
-    ]
-  }
-]
+    label: '新建',
+    key: 'new',
+  },
+  {
+    label: '打开',
+    key: 'open',
+  },
+  {
+    label: '从 URL 打开',
+    key: 'openFromUrl',
+  },
+  {
+    label: '保存为',
+    key: 'saveAs',
+  },
+];
 
+const handleSelect = () => {};
 </script>
 
 <template>
   <div class="mg-menu">
-    <n-menu
-        mode="horizontal"
-        :options="menuOptions"
-        responsive
-    />
+    <img class="mg-logo" :src="logo" alt="" />
+    <n-dropdown trigger="hover" :options="fileOption" @select="handleSelect">
+      <n-button quaternary size="small"> 文件 </n-button>
+    </n-dropdown>
+    <n-dropdown trigger="hover" :options="fileOption" @select="handleSelect">
+      <n-button quaternary size="small"> 编辑 </n-button>
+    </n-dropdown>
+    <n-dropdown trigger="hover" :options="fileOption" @select="handleSelect">
+      <n-button quaternary size="small"> 图像 </n-button>
+    </n-dropdown>
+    <n-dropdown trigger="hover" :options="fileOption" @select="handleSelect">
+      <n-button quaternary size="small"> 窗口 </n-button>
+    </n-dropdown>
+    <n-dropdown trigger="hover" :options="fileOption" @select="handleSelect">
+      <n-button quaternary size="small"> 更多 </n-button>
+    </n-dropdown>
   </div>
 </template>
 
 <style scoped>
-.mg-menu{
-  height: 40px;
+.mg-menu {
+  padding: 0 14px;
+  height: 30px;
+  background-color: #474747;
+  display: flex;
+  align-items: center;
+}
+.mg-logo {
+  width: 32px;
+}
+.mg-header {
+  color: aliceblue;
+  font-size: 20px;
 }
 </style>

@@ -1,12 +1,11 @@
-<script setup lang="ts">
-
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <div class="mg-toolbar">
-  </div>
+  <div class="mg-toolbar"></div>
 </template>
 
 <style scoped>
-
+.mg-toolbar {
+  width: 200px;
+}
 </style>
