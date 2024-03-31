@@ -1,19 +1,21 @@
 <script setup lang="ts">
 import { ArchiveOutline as ArchiveIcon } from '@vicons/ionicons5';
 import { NUploadDragger, NUpload, NIcon, NText, NP } from 'naive-ui';
-import { SettledFileInfo } from 'naive-ui/es/upload/src/interface';
+import type { SettledFileInfo } from 'naive-ui/es/upload/src/interface';
+import { magickEditor } from '../../magickEditor.ts';
 
 function fileChange(options: {
   file: SettledFileInfo;
   fileList: SettledFileInfo[];
   event: ProgressEvent | Event | undefined;
 }) {
-  console.error(options);
+  // console.error(options);
+  magickEditor.openFile(options.file.file!);
 }
 </script>
 
 <template>
-  <div class="mg-uploader">
+  <div class="mg-open-file">
     <n-upload :default-upload="false" @change="fileChange" :show-file-list="false">
       <n-upload-dragger :default-upload="false">
         <div style="margin-bottom: 12px">
@@ -31,6 +33,6 @@ function fileChange(options: {
 </template>
 
 <style scoped>
-.mg-uploader {
+.mg-open-file {
 }
 </style>

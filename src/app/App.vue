@@ -5,8 +5,6 @@ import MenuMain from './modules/menu/Main.vue';
 import ToolbarMain from './modules/toolbar/Main.vue';
 import StageMain from './modules/stage/Main.vue';
 import ToolPanelMain from './modules/toolPanel/Main.vue';
-import { MAGICK_CORE } from './magickCore.ts';
-import { MagicCore } from './core';
 import Divider from './components/Divider.vue';
 
 const themeOverrides: GlobalThemeOverrides = {
@@ -14,7 +12,6 @@ const themeOverrides: GlobalThemeOverrides = {
   Menu: {},
   Button: {},
 };
-provide(MAGICK_CORE, new MagicCore());
 </script>
 
 <template>

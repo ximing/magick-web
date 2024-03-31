@@ -1,14 +1,12 @@
 <script setup lang="ts">
 import Editor from './Editor.vue';
-import Welcome from './Welcome.vue';
-import { useMagickCore } from '../../magickCore.ts';
-const magickCore = useMagickCore();
-const { isOpenFile } = magickCore.fileManager;
+import OpenFile from './OpenFile.vue';
+import { magickEditor } from '../../magickEditor.ts';
 </script>
 
 <template>
   <div class="mg-stage">
-    <Welcome v-if="isOpenFile" />
+    <OpenFile v-if="!magickEditor.viewState.isOpenFile" />
     <Editor v-else />
   </div>
 </template>
@@ -19,5 +17,6 @@ const { isOpenFile } = magickCore.fileManager;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 </style>

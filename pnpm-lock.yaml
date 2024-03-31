@@ -14,12 +14,21 @@ dependencies:
   eventemitter3:
     specifier: ^5.0.1
     version: 5.0.1
+  immutable:
+    specifier: ^4.3.5
+    version: 4.3.5
   konva:
     specifier: ^9.3.6
     version: 9.3.6
   naive-ui:
     specifier: ^2.38.1
     version: 2.38.1(vue@3.4.21)
+  nanoid:
+    specifier: ^5.0.6
+    version: 5.0.6
+  performance-now:
+    specifier: ^2.1.0
+    version: 2.1.0
   vfonts:
     specifier: ^0.0.3
     version: 0.0.3
@@ -677,6 +686,10 @@ packages:
     engines: {node: '>=12.0.0'}
     dev: false
 
+  /immutable@4.3.5:
+    resolution: {integrity: sha512-8eabxkth9gZatlwl5TBuJnCsoTADlL6ftEr7A4qgdaTsPyreilDSnUk57SO+jfKcNtxPa22U5KK6DSeAYhpBJw==}
+    dev: false
+
   /konva@9.3.6:
     resolution: {integrity: sha512-dqR8EbcM0hjuilZCBP6xauQ5V3kH3m9kBcsDkqPypQuRgsXbcXUrxqYxhNbdvKZpYNW8Amq94jAD/C0NY3qfBQ==}
     dev: false
@@ -745,9 +758,19 @@ packages:
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
+  /nanoid@5.0.6:
+    resolution: {integrity: sha512-rRq0eMHoGZxlvaFOUdK1Ev83Bd1IgzzR+WJ3IbDJ7QOSdAxYjlurSPqFs9s4lJg29RT6nPwizFtJhQS6V5xgiA==}
+    engines: {node: ^18 || >=20}
+    hasBin: true
+    dev: false
+
   /path-browserify@1.0.1:
     resolution: {integrity: sha512-b7uo2UCUOYZcnF/3ID0lulOJi/bafxa1xPe7ZPsammBSpjSWQkjNxlt635YGS2MiR9GjvuXCtz2emr3jbsz98g==}
     dev: true
+
+  /performance-now@2.1.0:
+    resolution: {integrity: sha512-7EAHlyLHI56VEIdK57uwHdHKIaAGbnXPiw0yWbarQZOKaKpvUIgW0jWRVLiatnM+XXlSwsanIBH/hzGMJulMow==}
+    dev: false
 
   /picocolors@1.0.0:
     resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==}

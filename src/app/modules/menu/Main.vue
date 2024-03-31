@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { NDropdown, NButton, NSpace } from 'naive-ui';
+import { NDropdown, NButton } from 'naive-ui';
 import logo from '../../assets/logo.png';
 const fileOption = [
   {

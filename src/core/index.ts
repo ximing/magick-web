@@ -1,29 +1,25 @@
-import Konva from 'konva';
 import { FileManager } from './managers/fileManager.ts';
 import { EventEmitter } from 'eventemitter3';
+import { LayerManager } from './managers/layerManager.ts';
 
-export class MagicCore {
+export class MagickCore {
   container!: HTMLDivElement;
 
-  stage!: Konva.Stage;
-
-  fileManager!: FileManager;
-
   eventManager!: EventEmitter;
-
+  fileManager!: FileManager;
+  layerManager!: LayerManager;
   constructor() {
     this.initManager();
   }
 
-  init(options: { container: HTMLDivElement }) {
+  init(options: { container: HTMLDivElement; height: number; width: number }) {
     this.container = options.container;
-    this.stage = new Konva.Stage({
-      container: this.container,
-    });
+    this.layerManager.init(options);
   }
 
   private initManager() {
     this.eventManager = new EventEmitter<string | symbol, any>();
     this.fileManager = new FileManager(this);
+    this.layerManager = new LayerManager(this);
   }
 }
