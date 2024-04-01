@@ -20,15 +20,37 @@ export class MagickEditor {
     reader.onload = (event) => {
       var image = new Image();
       image.onload = async () => {
+        const { height, width } = this.state.root.props;
+        // 计算缩放比例和偏移量
+        let scale = 1;
+        let offsetX = 0;
+        let offsetY = 0;
+        if (image.width > width * 0.85 || image.height > height * 0.85) {
+          // 如果图片尺寸大于舞台尺寸的75%，缩放到舞台的75%
+          scale = Math.min((width * 0.85) / image.width, (height * 0.85) / image.height);
+          offsetX = (image.width * scale - width) / 2;
+          offsetY = (image.height * scale - height) / 2;
+        } else {
+          // 如果图片尺寸小于舞台尺寸的75%，不缩放
+          offsetX = (image.width - width) / 2;
+          offsetY = (image.height - height) / 2;
+        }
         this.view.dispatch(
-          new Transform(this.view.state).addShape(
-            'Image',
-            0,
-            {
-              image,
-            },
-            this.activeLayerId,
-          ),
+          new Transform(this.view.state)
+            .addShape(
+              'Image',
+              0,
+              {
+                image,
+              },
+              this.activeLayerId,
+            )
+            .changeLayer(this.activeLayerId, {
+              scaleX: scale,
+              scaleY: scale,
+              x: -offsetX,
+              y: -offsetY,
+            }),
         );
       };
       image.src = event.target!.result as string;

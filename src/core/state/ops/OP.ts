@@ -1,13 +1,15 @@
 import { MagickState } from '../index.ts';
 
 export abstract class OP {
-  abstract apply(state: MagickState): void;
+  state!: MagickState;
 
-  abstract invert(state: MagickState): void;
+  abstract apply(state: MagickState): MagickState;
+
+  abstract invert(state: MagickState): MagickState;
 
   abstract map(): void;
 
   abstract getMap(): void;
 
-  abstract toJSON(): void;
+  abstract toJSON(): any;
 }

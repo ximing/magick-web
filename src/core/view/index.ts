@@ -12,12 +12,16 @@ export class MagickView {
   state!: MagickState;
   root!: Konva.Stage;
 
-  constructor(dom: HTMLDivElement, options: { state?: MagickState }) {
+  constructor(
+    dom: HTMLDivElement,
+    options: { state?: MagickState; dispatch?: (tr: Transform) => MagickState },
+  ) {
     this.dom = dom;
     // const rootID = nanoid();
     // this.state = new MagickState(new VNode('stage', {}, [], null, rootID));
     // this.state = this.state.apply(new Transform(this.state).addLayer(0, {}, '图层1'));
     options.state && this.setState(options.state);
+    options.dispatch && (this.dispatch = options.dispatch!.bind(this));
   }
 
   get rootId() {
@@ -199,6 +203,7 @@ export class MagickView {
   dispatch(tr: Transform) {
     const newState = this.state.apply(tr);
     this.setState(newState);
+    return newState;
   }
 
   destroy() {

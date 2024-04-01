@@ -70,6 +70,50 @@ export class VNode {
     return null;
   }
 
+  changeAttrsById(id: string, attrs: Record<string, any>): VNode | null {
+    if (this.id === id) {
+      return new VNode(this.type, this.attrs.merge(attrs), this.children, this.id, this.parent);
+    }
+    for (let [index, child] of this.children.entries()) {
+      const updatedNode = child.changeAttrsById(id, attrs);
+      if (updatedNode) {
+        return new VNode(
+          this.type,
+          this.attrs,
+          this.children.set(index, updatedNode),
+          this.id,
+          this.parent,
+        );
+      }
+    }
+    return null;
+  }
+
+  delAttrsById(id: string, keyPath: string[]): VNode | null {
+    if (this.id === id) {
+      return new VNode(
+        this.type,
+        this.attrs.deleteIn(keyPath),
+        this.children,
+        this.id,
+        this.parent,
+      );
+    }
+    for (let [index, child] of this.children.entries()) {
+      const updatedNode = child.delAttrsById(id, keyPath);
+      if (updatedNode) {
+        return new VNode(
+          this.type,
+          this.attrs,
+          this.children.set(index, updatedNode),
+          this.id,
+          this.parent,
+        );
+      }
+    }
+    return null;
+  }
+
   toJSON(): {
     id: string;
     attrs: Record<string, any>;

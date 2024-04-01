@@ -7,8 +7,9 @@ export class AddLayerOP extends OP {
   name: string;
   index: number;
   id: string;
-  state!: MagickState;
+
   attrs: Record<string, any> = {};
+  op = 'AddLayerOP';
   constructor(index: number, attrs: Record<string, any> = {}, name?: string, id?: string) {
     super();
     this.name = name || '未命名';
@@ -34,6 +35,7 @@ export class AddLayerOP extends OP {
 
   toJSON() {
     return {
+      op: this.op,
       name: this.name,
       type: 'Layer',
       index: this.index,

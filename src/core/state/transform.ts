@@ -3,6 +3,7 @@ import { MagickState } from './index.ts';
 import { AddLayerOP } from './ops/AddLayer.ts';
 import { nanoid } from 'nanoid';
 import { AddSharpOp } from './ops/AddSharp.ts';
+import { ChangeLayer } from './ops/ChangeLayer.ts';
 
 export class Transform {
   ops: OP[] = [];
@@ -19,8 +20,7 @@ export class Transform {
     this.before = stage;
   }
 
-  addLayer(index: number, attrs: Record<string, any> = {}, name?: string, id?: string) {
-    const op = new AddLayerOP(index, attrs, name, id);
+  private doOPInner(op: OP) {
     this.ops.push(op);
     const newState = op.apply(this.state);
     this.states.push(newState);
@@ -28,12 +28,18 @@ export class Transform {
     return this;
   }
 
+  addLayer(index: number, attrs: Record<string, any> = {}, name?: string, id?: string) {
+    const op = new AddLayerOP(index, attrs, name, id);
+    return this.doOPInner(op);
+  }
+
   removeLayer() {
     return this;
   }
 
-  changeLayer() {
-    return this;
+  changeLayer(id: string, attrs: Record<string, any> = {}) {
+    const op = new ChangeLayer(id, attrs);
+    return this.doOPInner(op);
   }
 
   addShape(
@@ -45,11 +51,7 @@ export class Transform {
   ) {
     console.log('addShape', parentId);
     const op = new AddSharpOp(type, attrs, parentId, index, id);
-    this.ops.push(op);
-    const newState = op.apply(this.state);
-    this.states.push(newState);
-    this.state = newState;
-    return this;
+    return this.doOPInner(op);
   }
 
   removeShape() {

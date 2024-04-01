@@ -31,6 +31,22 @@ export class MagickState {
     throw new Error(`Node with id ${id} not found`);
   }
 
+  changeAttrsById(id: string, attrs: Record<string, any>) {
+    const newNode = this.root.changeAttrsById(id, attrs);
+    if (newNode) {
+      return new MagickState(newNode, this.version);
+    }
+    throw new Error(`Node with id ${id} not found`);
+  }
+
+  delAttrsById(id: string, keyPath: string[]) {
+    const newNode = this.root.delAttrsById(id, keyPath);
+    if (newNode) {
+      return new MagickState(newNode, this.version);
+    }
+    throw new Error(`Node with id ${id} not found`);
+  }
+
   toJSON() {
     return {
       version: this.version,

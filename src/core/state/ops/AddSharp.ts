@@ -10,7 +10,7 @@ export class AddSharpOp extends OP {
   id: string;
   parentId: string;
 
-  state!: MagickState;
+  op = 'AddSharpOp';
 
   constructor(
     type: string,
@@ -31,12 +31,7 @@ export class AddSharpOp extends OP {
     this.state = state;
     return state.appendNodeById(
       this.parentId,
-      new VNode(
-        this.type,
-        Object.assign({ id: this.id }, this.attrs),
-        [],
-        this.id,
-      ),
+      new VNode(this.type, Object.assign({ id: this.id }, this.attrs), [], this.id),
     );
   }
 
@@ -49,6 +44,7 @@ export class AddSharpOp extends OP {
 
   toJSON() {
     return {
+      op: this.op,
       parentId: this.parentId,
       type: this.type,
       index: this.index,
