@@ -20,7 +20,8 @@
     "eventemitter3": "^5.0.1",
     "nanoid": "^5.0.6",
     "performance-now": "^2.1.0",
-    "immutable": "^4.3.5"
+    "immutable": "^4.3.5",
+    "mime": "^4.0.1"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.4",

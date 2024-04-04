@@ -3,7 +3,7 @@ import { MagickState } from './index.ts';
 import { AddLayerOP } from './ops/AddLayer.ts';
 import { nanoid } from 'nanoid';
 import { AddSharpOp } from './ops/AddSharp.ts';
-import { ChangeLayer } from './ops/ChangeLayer.ts';
+import { ChangeAttrs } from './ops/ChangeAttrs.ts';
 
 export class Transform {
   ops: OP[] = [];
@@ -37,8 +37,8 @@ export class Transform {
     return this;
   }
 
-  changeLayer(id: string, attrs: Record<string, any> = {}) {
-    const op = new ChangeLayer(id, attrs);
+  changeAttrs(id: string, attrs: Record<string, any> = {}) {
+    const op = new ChangeAttrs(id, attrs);
     return this.doOPInner(op);
   }
 

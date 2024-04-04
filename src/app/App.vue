@@ -1,17 +1,18 @@
 <script setup lang="ts">
-import { provide } from 'vue';
 import { darkTheme, GlobalThemeOverrides, NConfigProvider } from 'naive-ui';
 import MenuMain from './modules/menu/Main.vue';
 import ToolbarMain from './modules/toolbar/Main.vue';
 import StageMain from './modules/stage/Main.vue';
 import ToolPanelMain from './modules/toolPanel/Main.vue';
 import Divider from './components/Divider.vue';
+import { magickEditor } from './magickEditor.ts';
 
 const themeOverrides: GlobalThemeOverrides = {
   common: {},
   Menu: {},
   Button: {},
 };
+magickEditor.initMagickWasm();
 </script>
 
 <template>

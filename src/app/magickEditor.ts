@@ -2,6 +2,10 @@ import { MagickState } from '../core/state';
 import { MagickView } from '../core/view';
 import { reactive } from 'vue';
 import { Transform } from '../core/state/transform.ts';
+import Konva from 'konva';
+import { ImageMagick, initializeImageMagick } from '@imagemagick/magick-wasm';
+import { nanoid } from 'nanoid';
+import mime from 'mime';
 
 export class MagickEditor {
   state!: MagickState;
@@ -45,7 +49,7 @@ export class MagickEditor {
               },
               this.activeLayerId,
             )
-            .changeLayer(this.activeLayerId, {
+            .changeAttrs(this.state.root.id, {
               scaleX: scale,
               scaleY: scale,
               x: -offsetX,
@@ -56,6 +60,41 @@ export class MagickEditor {
       image.src = event.target!.result as string;
     };
     reader.readAsDataURL(file);
+  }
+
+  exportCanvas() {
+    let layers = this.view.root.getChildren();
+    let newLayer = new Konva.Layer();
+    layers.forEach((layer) => {
+      layer.getChildren().forEach((child) => {
+        newLayer.add(child.clone());
+      });
+    });
+    // Draw the new layer
+    newLayer.draw();
+    return newLayer.toCanvas();
+  }
+
+  exportFile(type: string) {
+    const canvas = this.exportCanvas();
+    ImageMagick.readFromCanvas(canvas, (image) => {
+      image.write(type as any, async (pngData) => {
+        let blob = new Blob([pngData], { type: mime.getType(type) });
+        let url = URL.createObjectURL(blob);
+        let link = document.createElement('a');
+        link.href = url;
+        link.download = `${nanoid()}.${mime.getExtension(mime.getType(type))}`;
+        link.click();
+        setTimeout(() => {
+          link.remove();
+        }, 2000);
+      });
+    });
+  }
+
+  initMagickWasm() {
+    const wasmLocation = new URL('@imagemagick/magick-wasm/magick.wasm', import.meta.url);
+    return initializeImageMagick(wasmLocation);
   }
 
   initView(dom: HTMLDivElement) {

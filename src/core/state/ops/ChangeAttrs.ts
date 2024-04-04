@@ -1,11 +1,11 @@
 import { OP } from './OP.ts';
 import { MagickState } from '../index.ts';
 
-export class ChangeLayer extends OP {
+export class ChangeAttrs extends OP {
   id: string;
   attrs: Record<string, any> = {};
 
-  op = 'ChangeLayer';
+  op = 'ChangeAttrs';
 
   constructor(id: string, attrs: Record<string, any> = {}) {
     super();
@@ -35,6 +35,6 @@ export class ChangeLayer extends OP {
   }
 
   static fromJSON(json: { id: string; attrs: Record<string, any> }) {
-    return new ChangeLayer(json.id, json.attrs);
+    return new ChangeAttrs(json.id, json.attrs);
   }
 }

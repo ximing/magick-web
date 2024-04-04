@@ -1,6 +1,9 @@
 <script setup lang="ts">
-import { NDropdown, NButton } from 'naive-ui';
+import { NButton, NDropdown } from 'naive-ui';
 import logo from '../../assets/logo.png';
+import { ImageMagick, MagickFormat } from '@imagemagick/magick-wasm';
+import { magickEditor } from '../../magickEditor.ts';
+
 const fileOption = [
   {
     label: '新建',
@@ -17,6 +20,44 @@ const fileOption = [
   {
     label: '保存为',
     key: 'saveAs',
+    children: [
+      {
+        label: 'png',
+        key: 'png',
+        props: {
+          onClick: () => {
+            magickEditor.exportFile(MagickFormat.Png);
+          },
+        },
+      },
+      {
+        label: 'jpeg',
+        key: 'jpeg',
+        props: {
+          onClick: () => {
+            magickEditor.exportFile(MagickFormat.Jpg);
+          },
+        },
+      },
+      {
+        label: 'icons',
+        key: 'icons',
+        props: {
+          onClick: () => {
+            magickEditor.exportFile(MagickFormat.Icon);
+          },
+        },
+      },
+      {
+        label: 'ioc',
+        key: 'ioc',
+        props: {
+          onClick: () => {
+            magickEditor.exportFile(MagickFormat.Ico);
+          },
+        },
+      },
+    ],
   },
 ];
 
